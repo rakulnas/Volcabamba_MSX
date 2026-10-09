@@ -1,0 +1,15 @@
+LIFE FORTRESS VOLCABAMBA — FIX19 CONGELADA
+Fecha: 2026-10-02. Solicitud expresa de Felipe: «congela».
+Revisión: R04 FIX19 STORY FINISH TEST01.
+Conservar ROM y SOURCE exactos; no sobrescribirlos ni modificar su contenido.
+Toda evolución posterior: FIX20 o revisión superior.
+FIX18 y FIX17 mantienen sus congelaciones previas.
+
+SHA-256:
+7a7775b712ec622ebac5fb3e4165eb40d3073d381aba1cb4b75f6262ab048bab  LIFE_FORTRESS_VOLCABAMBA_MD_R04_FIX19_STORY_FINISH_TEST01.bin
+9eebaeb7dad8494f3db25e3463daab7ab13b5f9c813dcc58d97cbc184bd09634  VOLCABAMBA_MD_SGDK_R04_FIX19_STORY_FINISH_TEST01_SOURCE.zip
+
+Estado registrado: compilación nativa desde SOURCE; dos builds limpias idénticas; 44 pruebas de emulador PAL/NTSC PASS, con recorrido de seis fases y ending, 30 piedras, bonus/extends e intro.
+Música WAV aparcada por instrucción de Felipe.
+REAL HARDWARE VALIDATION: PENDING FELIPE.
+La congelación conserva una baseline aprobada; no añade una certificación de paridad exhaustiva ni de hardware físico.

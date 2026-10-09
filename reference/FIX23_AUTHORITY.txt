@@ -1,0 +1,5 @@
+Authority source for VOLCABAMBA MSX2 BASE04:
+VOLCABAMBA_MD_SGDK_R04_FIX23_START_PAUSE_TEST01_SOURCE.zip
+SHA-256: 34c3b072fb4cba933fe12e1f0f60f14a76e73b86626847d193fe1ec1c50b6aab
+
+BASE04 does not patch or require the Mega Drive ROM. Canonical PNG/data extracts included in this source are regenerated/derived from the received FIX23 source tree.
