@@ -1,0 +1,20 @@
+; MSX BIOS / system variables used by VOLCABAMBA MSX2 BASE04
+ENASLT   equ 0x0024
+MSXVER   equ 0x002D
+DISSCR   equ 0x0041
+ENASCR   equ 0x0044
+WRTVDP   equ 0x0047
+FILVRM   equ 0x0056
+LDIRVM   equ 0x005C
+CHGMOD   equ 0x005F
+INITXT   equ 0x006C
+CHPUT    equ 0x00A2
+GTSTCK   equ 0x00D5
+GTTRIG   equ 0x00D8
+RSLREG   equ 0x0138
+SNSMAT   equ 0x0141
+EXPTBL   equ 0xFCC1
+SLTTBL   equ 0xFCC5
+RG1SAV   equ 0xF3E0
+RG9SAV   equ 0xFFE8
+JIFFY    equ 0xFC9E
