@@ -1,0 +1,24 @@
+name: Build MSX ROMs from source
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install Pillow
+      - run: bash build.sh
+      - name: Verify reproducible FIX03 safe ROMs
+        run: |
+          echo '8148b4c0406e836024acf14de8c7a7bf9c3e491d6b3d18878fed13a86fdd6053  out/VOLCABAMBA_MSX2_TURBOR_HYBRID_H02.rom' | sha256sum -c -
+          echo '94c6fa97c5e31828a5c0a4b6bfa2f24810f93b5c3eb5f599b478c6e617ca5cab  out/VOLCABAMBA_MSX_TURBOR_ONLY_H02.rom' | sha256sum -c -
+      - uses: actions/upload-artifact@v4
+        with:
+          name: volcabamba-fix03-roms
+          path: out/*.rom
