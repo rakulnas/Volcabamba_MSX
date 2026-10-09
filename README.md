@@ -1,72 +1,34 @@
-# VOLCABAMBA_MSX2_TURBOR_HYBRID — H01
+# Volcabamba MSX2 / turboR — repositorio canónico
 
-Un solo cartucho `.rom` (512 KiB, mapper **ASCII16**) que decide solo en qué
-máquina está y arranca el motor adecuado:
+Port nativo para MSX2 y MSX turboR, basado en el juego original HSP y la comparación con la fuente Mega Drive FIX23.
 
-| Máquina | Lo que pasa |
-|---|---|
-| MSX1 | Pantalla `MSX2 OR HIGHER REQUIRED` (no se cuelga) |
-| MSX2 / MSX2+ | Motor **Z80** (banco 20): versión fiel optimizada |
-| MSX turboR | CPU → **R800 DRAM** (LED turbo encendido) + motor **R800** (banco 21) |
+## Estado real — 9 de octubre de 2026
 
-El jugador no elige nada. Mapas, gráficos, scripts de oleadas, tablas, textos y
-datos de juego son **los mismos bancos** para las dos rutas (bancos 1..19). Lo
-único duplicado es el runtime, y ni siquiera a mano: los dos motores salen del
-**mismo fuente** (`src/engine/engine.asm`) ensamblado con `TURBO=0` y `TURBO=1`.
+**H02 FIX03 es experimental**, NO definitivo. Se han compilado correctamente las ROMs híbrida y exclusiva turboR desde SOURCE, pero el scroll todavía va a saltos por tiles de 8 píxeles y la secuencia de salida de la nodriza sigue necesitando correcciones (profundidad de la nave, estrellas, transición). El cartel CAUTION se ha modificado en código pero no está validado visualmente.
 
-```
-BOOT (banco 0) → MSXVER → ID de VDP (V9938/V9958) → ¿turboR? → CHGCPU R800
-     → trampolín en RAM → banco 20 (Z80) o 21 (R800) → juego
-```
+**Importante:** los ZIPs y los archivos binarios completos todavía no están en este repositorio remoto. Están organizados en el paquete `VOLCABAMBA_GITHUB_REPOSITORIO_LISTO.zip` entregado en la conversación de ChatGPT; contiene 154 archivos, 107.363.022 bytes y SHA-256 `f290ae1621b39eba7d9e25a7327cf50edc10d5b267ef368070c80fe86dbbc607`.
 
-## Compilar
+## Cómo completar la importación de todo el material
 
-Requisitos: `python3` y `Pillow` (`pip install pillow`). Nada más.
+1. Descargar y descomprimir `VOLCABAMBA_GITHUB_REPOSITORIO_LISTO.zip`.
+2. En macOS o Linux, desde la carpeta descomprimida, ejecutar: `bash PUBLICAR_EN_GITHUB.command`.
+3. El script clona este repositorio, conserva su documentación existente, añade **SOURCE, res/canonical, reference/GDD, reference/md_fix23, history/archives, roms/historic, validadores y hashes**, crea un commit y lo publica mediante `git push`.
+4. Verificar en GitHub que aparecen los directorios anteriores y que la compilación nativa produce ROMs con las huellas indicadas más abajo.
 
-```sh
-./build.sh          # o: make
-```
+Hashes esperados, build FIX03 conservadora:
+- Híbrida: `8148b4c0406e836024acf14de8c7a7bf9c3e491d6b3d18878fed13a86fdd6053`.
+- turboR exclusiva: `94c6fa97c5e31828a5c0a4b6bfa2f24810f93b5c3eb5f599b478c6e617ca5cab`.
 
-Salida: `out/VOLCABAMBA_MSX2_TURBOR_HYBRID.rom` + símbolos de los tres
-módulos + `validation/`. La build borra `out/ generated/ validation/` y lo
-regenera todo desde SOURCE: conversores de recursos → ensamblador Z80 (boot +
-2 motores) → enlazado ASCII16 → validación estática. No lee, ni usa ni
-parchea ninguna ROM/BIN anterior. Dos builds limpias dan la misma ROM byte a byte.
+La compilación requiere Python 3 y Pillow, y se realiza con `bash build.sh` tras la importación.
 
-## Probar en emulador (opcional, no forma parte de la build)
+## Pendientes
 
-```sh
-python3 tools/emu/run_emu_tests.py          # ~20 s con openMSX + C-BIOS
-python3 tools/emu/run_emu_tests.py --quick  # sólo pruebas de arranque
-```
+- Scroll **verdaderamente por píxel** sin mover HUD ni producir bloqueos VRAM.
+- Secuencia continua nodriza → salida → fase, con la nave oculta tras el casco.
+- Fondo de estrellas original y aviso CAUTION validado en emulador.
+- Verificar vidas/HUD, formaciones y jefes frente a HSP/FIX23, también fases 2–6.
+- Emulación y hardware MSX2/turboR reales.
 
-En macOS usa el openMSX instalado (`/Applications/openMSX.app` o
-`OPENMSX=/ruta/openmsx`). Escribe `validation/EMULATOR_REPORT.json`.
-Carga manual: `openmsx -machine C-BIOS_MSX2 -cart out/VOLCABAMBA_MSX2_TURBOR_HYBRID.rom -romtype ASCII16`.
+No se han identificado archivos musicales independientes en el SOURCE recuperado. No afirmar que la música está archivada ni que existe licencia pública para recursos originales sin verificarlo.
 
-## Controles (sin cambios)
-
-- Cursores / joystick: mover
-- Z / Botón 1: disparar
-- X / Botón 2: cambiar dirección de disparo
-- SPACE: START / pausa / continuar
-- C: invencibilidad (debug)
-
-## Teclas de prueba al arrancar (mantener pulsada durante el boot)
-
-Sólo para test; el jugador normal no las necesita.
-
-- **N**: fuerza el motor Z80 (en turboR la CPU se queda en Z80 → experiencia MSX2 exacta).
-- **R**: fuerza el módulo R800 sin cambiar de CPU (permite probar el motor turboR en MSX2/emuladores sin BIOS turboR).
-- **F**: motor R800 con los límites de sprites de MSX2 (desactiva las mejoras opcionales).
-
-## Estado
-
-- Arranque MSX1/MSX2/MSX2+ y rama turboR: **PASS** en openMSX/C-BIOS (la rama turboR con un arnés que simula la BIOS turboR; C-BIOS no tiene turboR).
-- Fase 1 completa en MSX2 a **33,3 ticks/s** (BASE12 iba a ~19 = 57 % de velocidad).
-- Estado de juego idéntico tick a tick a BASE12 durante toda la Fase 1 (5282 ticks), salvo el láser del Centinela, corregido a propósito.
-- Motor Z80 y motor R800: estado de juego idéntico tick a tick (5282 ticks).
-- **Pendiente de Felipe**: hardware real MSX2 y, sobre todo, **turboR real** (aquí no se puede emular el R800).
-- Fases 2..6 siguen siendo la integración alpha heredada de BASE12.
-
-Ver `ARCHITECTURE.md` y `CHANGES_vs_BASE12.md`.
+Documentación detallada: [recuperación](docs/RECUPERACION_Y_ESTADO_2026-10-09.md), [H02 FIX02](docs/H02_FIX02_TURBOR_EXCLUSIVO.md), [H02 FIX01](docs/H02_FIX01_FRONTEND_FIDELITY.md).
