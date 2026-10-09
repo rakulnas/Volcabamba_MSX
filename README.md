@@ -6,7 +6,7 @@ Port nativo para MSX2 y MSX turboR, basado en el juego original HSP y la compara
 
 **H02 FIX03 es experimental**, NO definitivo. Se han compilado correctamente las ROMs híbrida y exclusiva turboR desde SOURCE, pero el scroll todavía va a saltos por tiles de 8 píxeles y la secuencia de salida de la nodriza sigue necesitando correcciones (profundidad de la nave, estrellas, transición). El cartel CAUTION se ha modificado en código pero no está validado visualmente.
 
-**Importante:** los ZIPs y los archivos binarios completos todavía no están en este repositorio remoto. Están organizados en el paquete `VOLCABAMBA_GITHUB_REPOSITORIO_LISTO.zip` entregado en la conversación de ChatGPT; contiene 154 archivos, 107.363.022 bytes y SHA-256 `f290ae1621b39eba7d9e25a7327cf50edc10d5b267ef368070c80fe86dbbc607`.
+**Importante:** los ZIPs y los archivos binarios completos todavía no están en este repositorio remoto. Están organizados en el paquete `VOLCABAMBA_GITHUB_REPOSITORIO_LISTO.zip` entregado en la conversación de ChatGPT; contiene 154 archivos, 107.363.251 bytes y SHA-256 `f32c0d45b6f46f4ffe282d2eb78b8fffb4b8622d2d1161fe1036b07168241377`.
 
 ## Cómo completar la importación de todo el material
 
