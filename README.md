@@ -32,3 +32,9 @@ La compilación requiere Python 3 y Pillow, y se realiza con `bash build.sh` tra
 No se han identificado archivos musicales independientes en el SOURCE recuperado. No afirmar que la música está archivada ni que existe licencia pública para recursos originales sin verificarlo.
 
 Documentación detallada: [recuperación](docs/RECUPERACION_Y_ESTADO_2026-10-09.md), [H02 FIX02](docs/H02_FIX02_TURBOR_EXCLUSIVO.md), [H02 FIX01](docs/H02_FIX01_FRONTEND_FIDELITY.md).
+
+## Auditoría real del repositorio — 11/10/2026
+
+**GitHub conectado y con escritura verificada. Pero este respaldo no está completo.** Están publicados el motor Z80/R800 y las dos ROMs H02 FIX03; faltan 18 PNG canónicos necesarios para compilar desde un clon limpio, las 9 ROMs históricas, 9 ZIP de SOURCE históricos, GDD PDF/HTML y algunos manifiestos. GitHub Actions está bloqueado y ahora informa expresamente qué gráficos faltan. El estado verificable está en [Auditoría del 11/10/2026](docs/AUDITORIA_GITHUB_2026-10-11.md) y en [Issue #1](https://github.com/rakulnas/Volcabamba_MSX/issues/1). **No cerrar el issue ni afirmar backup completo hasta restaurar todos los archivos y obtener CI PASS desde un clon limpio.**
+
+El paquete actualizado de traspaso `VOLCABAMBA_GITHUB_BACKUP_VERIFICADO_2026-10-11.zip` está disponible en la conversación original (155 archivos, SHA-256 `9e2072e857b0fcbfa56be5e1ca49343efe4d81ea361d072082ad2f7be172e2cb`). Incluye un `PUBLICAR_EN_GITHUB.command` probado contra un remoto Git local de ensayo que añade únicamente archivos ausentes y después verifica un clon fresco. **Su ejecución real contra GitHub queda pendiente.**
